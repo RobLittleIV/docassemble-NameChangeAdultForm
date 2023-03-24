@@ -34,6 +34,7 @@ data:
   typical role: "na"
   generate download screen: True
 ---
+
 code: |
   interview_metadata['main_interview_key'] =  'Name_change_adult_form'
 ---
@@ -71,7 +72,7 @@ code: |
   user_role = "na"
   user_ask_role = "na"
   is_mother_yes
-  users2_signature_date
+  users1_signature_date
   docket_number
   set_progress(14)
   trial_court.division
@@ -110,6 +111,42 @@ question: |
   Adult approval of minor name change
 subquestion: |
   Please answer the questions in order to produce a form that can be presented to a notary and then presented to the court along with the child's name change petition
+---
+sets:
+  - users[0].name.first
+  - users[0].name.last
+  - users[0].name.middle
+  - users[0].name.suffix    
+id: Childs Original Name
+question: |
+  What is the Child's current name? 
+fields:
+  - code: |
+      users[0].name_fields()
+---
+sets:
+  - users[1].name.first
+  - users[1].name.last
+  - users[1].name.middle
+  - users[1].name.suffix    
+id: What is Gaurdian's name 
+question: |
+  What is the Guardian's name?
+fields:
+  - code: |
+      users[1].name_fields()
+---
+sets:
+  - users[2].name.first
+  - users[2].name.last
+  - users[2].name.middle
+  - users[2].name.suffix    
+id: What is the Child's new name?
+question: |
+  What is the Child's new name?
+fields:
+  - code: |
+      users[2].name_fields()
 ---
 id: Who is filling out this form
 question: |
@@ -276,7 +313,7 @@ attachment:
       - "users3_name_last": ${ users[2].name.last }
       - "users3_name_first": ${ users[2].name.first }
       - "users3_name_middle": ${ users[2].name.middle }
-      - "users2_signature_date": ${ users2_signature_date.format() }
+      - "users2_signature_date": ${ users1_signature_date.format() }
       - "users2_signature": ${ users[1].signature_if_final(i) }
       - "users2_name": ${ users[1] }
 
