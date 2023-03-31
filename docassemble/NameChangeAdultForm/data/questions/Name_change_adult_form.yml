@@ -72,7 +72,6 @@ code: |
   user_role = "na"
   user_ask_role = "na"
   is_mother_yes
-  users1_signature_date
   docket_number
   set_progress(14)
   trial_court.division
@@ -93,6 +92,7 @@ code: |
   Name_change_adult_form_intro
   interview_order_Name_change_adult_form
   signature_date
+  basic_questions_signature_flow
   # Store anonymous data for analytics / statistics
   store_variables_snapshot(
       persistent=True,
@@ -158,13 +158,8 @@ fields:
     datatype: yesno
   - "Is father": is_father_yes
     datatype: yesno
----
-id: Signature
-question: |
-  Signature
-fields:
-  - "Date of users2 signature": users2_signature_date
-    datatype: date
+
+
 ---
 id: preview Name_change_adult_form
 question: |
@@ -227,10 +222,10 @@ review:
     button: |
       **Is father**:
       ${ word(yesno(is_father_yes)) }
-  - Edit: users2_signature_date
+  - Edit: signature_date
     button: |
       **Date of users2 signature**:
-      ${ users2_signature_date }
+      ${ signature_date }
 ---
 continue button field: users.revisit
 question: |
@@ -313,8 +308,9 @@ attachment:
       - "users3_name_last": ${ users[2].name.last }
       - "users3_name_first": ${ users[2].name.first }
       - "users3_name_middle": ${ users[2].name.middle }
-      - "users2_signature_date": ${ users1_signature_date.format() }
+      - "users2_signature_date": ${ signature_date.format() }
       - "users2_signature": ${ users[1].signature_if_final(i) }
       - "users2_name": ${ users[1] }
+      
 
 
