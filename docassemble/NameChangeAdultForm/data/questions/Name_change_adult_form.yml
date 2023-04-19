@@ -3,6 +3,7 @@ include:
   - docassemble.AssemblyLine:assembly_line.yml
   - docassemble.ALMassachusetts:al_massachusetts.yml
   - docassemble.MassAccess:massaccess.yml
+
 ---
 metadata:
   title: |
@@ -80,6 +81,9 @@ code: |
   set_progress(28)
   set_progress(42)
   set_progress(56)
+  agree_with_name
+  best_interest
+  warrant_systems
   interview_order_Name_change_adult_form = True
 ---
 ###################### Main order ######################
@@ -158,8 +162,25 @@ fields:
     datatype: yesno
   - "Is father": is_father_yes
     datatype: yesno
-
-
+---
+comment: | 
+  this is bullet point 1 in the form 
+id: understand_name
+continue button field: agree_with_name
+question: |
+  Have you read the name change form?
+subquestion: |
+  If you agree with the name on the form, press continue.
+---
+id: best_interest
+continue button field: best_interest
+question: |
+  If you find that the name change is in the child's best interest, press continue. 
+---
+id: warrant_systems
+continue button field: warrant_systems
+question: |
+ Do you assent to the court conducting a Court Activity Record Information (CARI) and Warrant Management System (WMS) check on any names used by the minor child, if the child is 12 years of age or older. If yes, press continue. 
 ---
 id: preview Name_change_adult_form
 question: |
